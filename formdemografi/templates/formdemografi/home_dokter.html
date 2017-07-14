@@ -1,0 +1,40 @@
+{% extends 'formdemografi/ui_base.html' %}
+
+{% block content %}
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+    <script type="text/javascript">
+    </script>
+
+    <h1>Daftar Antrian Pasien</h1>
+    <!-- list pasien -->
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>No Rekam Medis</th>
+                <th>Nama Pasien</th>
+                <th>Daftar Rekam Medis</th>
+                <th>Nomor Urut</th>
+                <th>Proses</th>
+                <th>Mutasi(Rawat Inap)</th>
+            </tr>
+        </thead>
+        {% for patient in patient_list %}
+        <tr>
+            <td>{{ patient.id }} | <a href="{% url 'formdemografi:patient_detail' patient.pk %}">Detail</a></td>  
+            <td>
+            <!-- {{ patienta.text }} -->
+            </td>
+            <td><a href="{% url 'formdemografi:list_patient_condition' patient.pk %}">Daftar</a></td>
+            <td>nomer</td>
+            <td><a class="btn btn-info" href="{% url 'formdemografi:condition_add' patient.pk %}">Proses</a></td>
+            <td>Mutasi</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+
+

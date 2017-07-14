@@ -1,0 +1,83 @@
+{% extends 'formdemografi/ui_base.html' %}
+
+{% block content %}
+
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+    <script type="text/javascript"></script>
+
+<h1>Rekam Medis Pasien {{ patient.id }}</h1>
+
+{% for condition in patient.condition_set.all %}
+    <ul class="list-group">
+    	<li class="list-group-item">
+    		<table class="table table-hover">
+    		    <tr>
+    		        <th>Tanggal</th>
+    		        <td>{{ condition.date_created }}</td>  
+    		    </tr>
+    		    <tr>
+    		        <th>Dokter</th>
+    		        <td>{{ condition.patient_id }}</td>  
+    		    </tr>
+    		    <tr>
+    		    	<th>Kode</th>
+    		    	<td>{{ condition.code }}</td>
+    		    </tr>
+    		    <tr>
+    		        <th>ID</th>
+    		        <td>
+    		            <table class="table table-bordered">
+		                    <thead>
+		                        <tr>
+		                            <th>Tipe</th>
+		                            <th>Nomor ID</th>
+		                        </tr>
+		                    </thead>
+		                    {% for a in condition.identifier_set.all %}
+		                    <tr>
+		                        <td>{{a.Type}}</td>
+		                        <td>{{a.Value}}</td>
+		                    </tr>
+		                    {% endfor %}
+		                </table>   
+    		        </td>  
+    		    </tr>
+    		    <tr>
+    		    	<th>Kategori</th>
+    		    	<td>{{ condition.category }}</td>
+    		    </tr>
+    		    <tr>
+    		    	<th>Bagian Tubuh</th>
+    		    	<td>{{ condition.bodysite }}</td>
+    		    </tr>
+    		    <tr>
+    		    	<th>Evidence</th>
+    		    	<td>
+    		    		<table class="table table-bordered">
+    		    			<thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Detail</th>
+                                </tr>
+                            </thead>
+                            {% for b in condition.evidence_set.all %}
+                            <tr>
+		                        <td>{{b.code}}</td>
+		                        <td>{{b.detail}}</td>
+		                    </tr>
+		                    {% endfor %}
+    		    		</table>
+    		    	</td>
+    		    </tr>
+    		    <tr>
+    		    	<th>Catatan</th>
+    		    	<td>{{ condition.notes }}</td>
+    		    </tr>
+    		</table>
+    	</li>
+    </ul>
+    
+{% endfor %}
+
+{% endblock %}
